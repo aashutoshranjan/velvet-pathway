@@ -386,11 +386,28 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_course_outline: {
+        Args: { _course_slug: string }
+        Returns: {
+          lesson_duration_min: number
+          lesson_id: string
+          lesson_position: number
+          lesson_title: string
+          module_id: string
+          module_position: number
+          module_summary: string
+          module_title: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_course_complete: {
+        Args: { _course_id: string; _user_id: string }
         Returns: boolean
       }
     }
