@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const Route = createFileRoute("/_authenticated/courses")({
-  head: () => ({ meta: [{ title: "Courses — LMS Trainee Program" }] }),
+  head: () => ({ meta: [{ title: "Programs — LMS Trainee Program" }] }),
   component: CoursesPage,
 });
 
