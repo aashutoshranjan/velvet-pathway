@@ -27,7 +27,7 @@ export function Header({ variant = "marketing" }: { variant?: "marketing" | "app
         {variant === "app" ? (
           <nav className="hidden items-center gap-1 md:flex">
             <Link to="/dashboard" className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground" activeProps={{ className: "text-foreground bg-secondary" }}>Dashboard</Link>
-            <Link to="/courses" className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground" activeProps={{ className: "text-foreground bg-secondary" }}>Courses</Link>
+            <Link to="/courses" className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground" activeProps={{ className: "text-foreground bg-secondary" }}>Programs</Link>
             <Link to="/profile" className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground" activeProps={{ className: "text-foreground bg-secondary" }}>Profile</Link>
           </nav>
         ) : (
