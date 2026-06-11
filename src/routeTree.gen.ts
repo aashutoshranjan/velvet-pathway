@@ -18,6 +18,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCoursesRouteImport } from './routes/_authenticated/courses'
 import { Route as AuthenticatedCoursesSlugRouteImport } from './routes/_authenticated/courses.$slug'
 import { Route as AuthenticatedCertificatesSerialRouteImport } from './routes/_authenticated/certificates.$serial'
+import { Route as AuthenticatedAdminImportRouteImport } from './routes/_authenticated/admin.import'
 import { Route as AuthenticatedLearnCourseSlugLessonIdRouteImport } from './routes/_authenticated/learn.$courseSlug.$lessonId'
 
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -66,6 +67,12 @@ const AuthenticatedCertificatesSerialRoute =
     path: '/certificates/$serial',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminImportRoute =
+  AuthenticatedAdminImportRouteImport.update({
+    id: '/admin/import',
+    path: '/admin/import',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLearnCourseSlugLessonIdRoute =
   AuthenticatedLearnCourseSlugLessonIdRouteImport.update({
     id: '/learn/$courseSlug/$lessonId',
@@ -80,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/courses': typeof AuthenticatedCoursesRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/admin/import': typeof AuthenticatedAdminImportRoute
   '/certificates/$serial': typeof AuthenticatedCertificatesSerialRoute
   '/courses/$slug': typeof AuthenticatedCoursesSlugRoute
   '/learn/$courseSlug/$lessonId': typeof AuthenticatedLearnCourseSlugLessonIdRoute
@@ -91,6 +99,7 @@ export interface FileRoutesByTo {
   '/courses': typeof AuthenticatedCoursesRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/admin/import': typeof AuthenticatedAdminImportRoute
   '/certificates/$serial': typeof AuthenticatedCertificatesSerialRoute
   '/courses/$slug': typeof AuthenticatedCoursesSlugRoute
   '/learn/$courseSlug/$lessonId': typeof AuthenticatedLearnCourseSlugLessonIdRoute
@@ -104,6 +113,7 @@ export interface FileRoutesById {
   '/_authenticated/courses': typeof AuthenticatedCoursesRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/admin/import': typeof AuthenticatedAdminImportRoute
   '/_authenticated/certificates/$serial': typeof AuthenticatedCertificatesSerialRoute
   '/_authenticated/courses/$slug': typeof AuthenticatedCoursesSlugRoute
   '/_authenticated/learn/$courseSlug/$lessonId': typeof AuthenticatedLearnCourseSlugLessonIdRoute
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/profile'
+    | '/admin/import'
     | '/certificates/$serial'
     | '/courses/$slug'
     | '/learn/$courseSlug/$lessonId'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/courses'
     | '/dashboard'
     | '/profile'
+    | '/admin/import'
     | '/certificates/$serial'
     | '/courses/$slug'
     | '/learn/$courseSlug/$lessonId'
@@ -140,6 +152,7 @@ export interface FileRouteTypes {
     | '/_authenticated/courses'
     | '/_authenticated/dashboard'
     | '/_authenticated/profile'
+    | '/_authenticated/admin/import'
     | '/_authenticated/certificates/$serial'
     | '/_authenticated/courses/$slug'
     | '/_authenticated/learn/$courseSlug/$lessonId'
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCertificatesSerialRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/import': {
+      id: '/_authenticated/admin/import'
+      path: '/admin/import'
+      fullPath: '/admin/import'
+      preLoaderRoute: typeof AuthenticatedAdminImportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/learn/$courseSlug/$lessonId': {
       id: '/_authenticated/learn/$courseSlug/$lessonId'
       path: '/learn/$courseSlug/$lessonId'
@@ -242,6 +262,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCoursesRoute: typeof AuthenticatedCoursesRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedAdminImportRoute: typeof AuthenticatedAdminImportRoute
   AuthenticatedCertificatesSerialRoute: typeof AuthenticatedCertificatesSerialRoute
   AuthenticatedLearnCourseSlugLessonIdRoute: typeof AuthenticatedLearnCourseSlugLessonIdRoute
 }
@@ -250,6 +271,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCoursesRoute: AuthenticatedCoursesRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedAdminImportRoute: AuthenticatedAdminImportRoute,
   AuthenticatedCertificatesSerialRoute: AuthenticatedCertificatesSerialRoute,
   AuthenticatedLearnCourseSlugLessonIdRoute:
     AuthenticatedLearnCourseSlugLessonIdRoute,
