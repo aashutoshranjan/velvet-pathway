@@ -1,5 +1,5 @@
 
-# Premium LMS — Build Plan
+# LMS Trainee Program — Build Plan
 
 ## 1. Design directions first
 
