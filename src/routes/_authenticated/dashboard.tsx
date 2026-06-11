@@ -48,19 +48,21 @@ function Dashboard() {
 
   const firstName = data?.profile?.full_name?.split(" ")[0] ?? "there";
 
+  const certByCourse = new Set((data?.certs ?? []).map((c: any) => c.courses?.slug));
+
   return (
-    <main className="mx-auto max-w-7xl px-6 py-10">
+    <main className="mx-auto max-w-7xl px-6 py-12">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-sm text-muted-foreground">Welcome back</p>
-          <h1 className="mt-1 font-display text-5xl">Hi, {firstName}.</h1>
+          <p className="text-sm font-medium text-muted-foreground">Welcome back</p>
+          <h1 className="mt-2 font-display text-4xl md:text-5xl">Hi, {firstName}.</h1>
         </div>
-        <Button asChild variant="outline"><Link to="/courses">Browse courses <ArrowRight className="h-4 w-4" /></Link></Button>
+        <Button asChild variant="outline" className="h-10"><Link to="/courses">Browse programs <ArrowRight className="h-4 w-4" /></Link></Button>
       </div>
 
       {isLoading ? (
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {[1,2,3].map((i) => <Skeleton key={i} className="h-48 rounded-2xl" />)}
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {[1,2,3].map((i) => <Skeleton key={i} className="h-56 rounded-2xl" />)}
         </div>
       ) : data!.courses.length === 0 ? (
         <EmptyState />
@@ -69,42 +71,55 @@ function Dashboard() {
           {/* Continue learning */}
           <ContinueLearning course={data!.courses.find((c) => c.percent < 100) ?? data!.courses[0]} />
 
-          <section className="mt-12">
-            <h2 className="font-display text-2xl">Your courses</h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {data!.courses.map((c: any) => (
-                <Link
-                  key={c.course_id}
-                  to="/courses/$slug"
-                  params={{ slug: c.courses.slug }}
-                  className="group rounded-2xl border border-border/60 bg-card p-5 shadow-sm transition hover:shadow-md"
-                >
-                  <div className="text-xs font-mono text-muted-foreground">{c.courses.level ?? "Program"} · {c.courses.duration_label}</div>
-                  <h3 className="mt-2 font-display text-xl">{c.courses.title}</h3>
-                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{c.courses.subtitle}</p>
-                  <div className="mt-4">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>{c.doneLessons}/{c.totalLessons} lessons</span>
-                      <span>{c.percent}%</span>
+          <section className="mt-14">
+            <h2 className="font-display text-2xl">Your programs</h2>
+            <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {data!.courses.map((c: any) => {
+                const hasCert = certByCourse.has(c.courses.slug);
+                return (
+                  <Link
+                    key={c.course_id}
+                    to="/courses/$slug"
+                    params={{ slug: c.courses.slug }}
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs transition hover:-translate-y-0.5 hover:shadow-lg"
+                  >
+                    <div className="relative aspect-[16/9] overflow-hidden bg-gradient-brand">
+                      <div className="absolute inset-0 bg-mesh opacity-60 mix-blend-overlay" />
+                      {hasCert && (
+                        <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-foreground shadow-sm">
+                          <Award className="h-3 w-3" /> Certified
+                        </div>
+                      )}
+                      <div className="absolute bottom-3 left-3 text-[11px] font-mono text-white/90">{c.courses.duration_label}</div>
                     </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary">
-                      <div className="h-full bg-gradient-brand transition-all" style={{ width: `${c.percent}%` }} />
+                    <div className="flex flex-1 flex-col p-5">
+                      <h3 className="font-display text-lg leading-snug">{c.courses.title}</h3>
+                      <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+                        <span>{c.doneLessons}/{c.totalLessons} lessons</span>
+                        <span className="font-medium text-foreground">{c.percent}%</span>
+                      </div>
+                      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary">
+                        <div className="h-full bg-gradient-brand transition-all" style={{ width: `${c.percent}%` }} />
+                      </div>
+                      <div className="mt-4 inline-flex items-center text-xs font-medium text-primary">
+                        {c.percent === 0 ? "Start program" : c.percent === 100 ? "Review program" : "Continue program"} <ArrowRight className="ml-1 h-3 w-3 transition group-hover:translate-x-0.5" />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </section>
 
           {data!.certs.length > 0 && (
-            <section className="mt-12">
+            <section className="mt-14">
               <h2 className="font-display text-2xl">Your certificates</h2>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
                 {data!.certs.map((c: any) => (
                   <Link key={c.serial} to="/certificates/$serial" params={{ serial: c.serial }} className="flex items-center gap-4 rounded-2xl border border-border/60 bg-card p-5 transition hover:shadow-md">
-                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand text-white"><Award className="h-5 w-5" /></div>
-                    <div className="flex-1">
-                      <div className="font-display text-lg">{c.courses.title}</div>
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-brand text-white shadow-sm"><Award className="h-5 w-5" /></div>
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate font-display text-base">{c.courses.title}</div>
                       <div className="text-xs font-mono text-muted-foreground">{c.serial}</div>
                     </div>
                     <ArrowRight className="h-4 w-4 text-muted-foreground" />
