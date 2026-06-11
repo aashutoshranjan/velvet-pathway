@@ -25,20 +25,35 @@ function CourseDetail() {
     queryFn: async () => {
       const { data: course, error } = await supabase
         .from("courses")
-        .select("*, modules(id, position, title, summary, lessons(id, position, title, duration_min))")
+        .select("*")
         .eq("slug", slug)
         .single();
       if (error) throw error;
-      const [{ data: enrollment }, { data: projects }, { data: assessment }] = await Promise.all([
+      const [{ data: outline }, { data: enrollment }, { data: projects }, { data: assessment }] = await Promise.all([
+        supabase.rpc("get_course_outline", { _course_slug: slug }),
         supabase.from("enrollments").select("id").eq("user_id", user.id).eq("course_id", course.id).maybeSingle(),
         supabase.from("projects").select("position, title, brief_md").eq("course_id", course.id).order("position"),
         supabase.from("final_assessments").select("title, body_md").eq("course_id", course.id).maybeSingle(),
       ]);
-      course.modules.sort((a: any, b: any) => a.position - b.position);
-      course.modules.forEach((m: any) => m.lessons.sort((a: any, b: any) => a.position - b.position));
+      // Group outline rows by module
+      const modulesMap = new Map<string, any>();
+      for (const row of (outline ?? []) as any[]) {
+        let m = modulesMap.get(row.module_id);
+        if (!m) {
+          m = { id: row.module_id, position: row.module_position, title: row.module_title, summary: row.module_summary, lessons: [] };
+          modulesMap.set(row.module_id, m);
+        }
+        if (row.lesson_id) {
+          m.lessons.push({ id: row.lesson_id, position: row.lesson_position, title: row.lesson_title, duration_min: row.lesson_duration_min });
+        }
+      }
+      const modules = Array.from(modulesMap.values()).sort((a, b) => a.position - b.position);
+      modules.forEach((m) => m.lessons.sort((a: any, b: any) => a.position - b.position));
+      (course as any).modules = modules;
       return { course, enrolled: !!enrollment, projects: projects ?? [], assessment };
     },
   });
+
 
   const enrollMut = useMutation({
     mutationFn: () => enroll({ data: { courseId: data!.course.id } }),
