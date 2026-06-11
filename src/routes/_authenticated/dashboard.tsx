@@ -194,7 +194,7 @@ function EmptyState() {
       </div>
       <h2 className="mt-6 font-display text-3xl">You're not enrolled yet</h2>
       <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">Browse our programs and enroll to start your training journey.</p>
-      <Button asChild className="mt-6 bg-gradient-brand text-white"><Link to="/courses">Browse courses</Link></Button>
+      <Button asChild className="mt-6 bg-gradient-brand text-white"><Link to="/courses">Browse programs</Link></Button>
     </div>
   );
 }
