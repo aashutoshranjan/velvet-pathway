@@ -35,7 +35,7 @@ function normalizePrograms(raw: unknown): Program[] {
 }
 
 function ImportPage() {
-  const importFn = useStartServerFn(importProgram);
+  const importFn = useServerFn(importProgram);
   const [file, setFile] = useState<File | null>(null);
   const [programs, setPrograms] = useState<Program[]>([]);
   const [parseError, setParseError] = useState<string | null>(null);
@@ -75,7 +75,7 @@ function ImportPage() {
         totals.modulesSkipped += res.counts.modulesSkipped;
         totals.lessons += res.counts.lessons;
         totals.lessonsSkipped += res.counts.lessonsSkipped;
-        totals.errors += res.logs.filter((l) => l.level === "error").length;
+        totals.errors += res.logs.filter((l: ImportLogEntry) => l.level === "error").length;
       } catch (e) {
         totals.errors++;
         setLogs((prev) => [...prev, { level: "error", message: `Program "${p.title}": ${e instanceof Error ? e.message : String(e)}` }]);
