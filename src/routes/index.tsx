@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, BookOpen, Award, Users, BarChart3, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Award, Users, TrendingUp, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 
@@ -24,7 +24,7 @@ function Landing() {
           <div className="relative mx-auto max-w-6xl px-6 pt-24 pb-32 text-center">
             <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
               <Sparkles className="h-3 w-3 text-primary" />
-              New cohort opening — Data Analytics, 1 Month Remote
+              New cohort now open — apply today
             </div>
             <h1 className="mt-8 font-display text-6xl leading-[1.05] sm:text-7xl md:text-8xl">
               <span className="text-gradient">Train like a professional.</span>
@@ -56,7 +56,7 @@ function Landing() {
             <div className="mt-14 grid gap-6 md:grid-cols-3">
               {[
                 { icon: BookOpen, t: "Structured curriculum", d: "Weeks → modules → lessons with objectives, resources, and assignments." },
-                { icon: BarChart3, t: "Real progress", d: "Per-lesson completion, course progress, resume-where-you-left-off." },
+                { icon: TrendingUp, t: "Real progress", d: "Per-lesson completion, course progress, resume-where-you-left-off." },
                 { icon: Award, t: "Verified certificates", d: "Premium printable certificates with unique serial numbers." },
                 { icon: Users, t: "Cohort experience", d: "Designed to scale from a single trainee to entire programs." },
                 { icon: Sparkles, t: "Polished UI", d: "Stripe-grade typography, motion, and micro-interactions." },
@@ -74,21 +74,12 @@ function Landing() {
           </div>
         </section>
 
-        {/* Program */}
-        <section id="program" className="relative overflow-hidden border-t border-border/60">
+        {/* CTA */}
+        <section className="relative overflow-hidden border-t border-border/60">
           <div className="absolute inset-0 bg-mesh opacity-60" aria-hidden />
           <div className="relative mx-auto max-w-6xl px-6 py-24 text-center">
-            <h2 className="font-display text-5xl">Data Analytics — 1 Month Remote Training</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">Four weeks. Twenty lessons. Three capstone projects. One certificate.</p>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {["Analytics Foundations","SQL & Databases","Python & Statistics","Visualization & Storytelling"].map((w, i) => (
-                <div key={w} className="rounded-2xl border border-border/60 bg-card/80 p-6 text-left backdrop-blur">
-                  <div className="text-xs font-mono text-muted-foreground">Week 0{i+1}</div>
-                  <div className="mt-2 font-display text-xl">{w}</div>
-                  <div className="mt-3 text-xs text-muted-foreground">5 lessons • assignments • resources</div>
-                </div>
-              ))}
-            </div>
+            <h2 className="font-display text-5xl">Start your training journey</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">Structured programs, real projects, and a certificate to show for it.</p>
             <Button asChild size="lg" className="mt-10 h-12 bg-gradient-brand px-6 text-white shadow-glow hover:opacity-90">
               <Link to="/auth" search={{ mode: "signup" }}>Enroll now <ArrowRight className="h-4 w-4" /></Link>
             </Button>
