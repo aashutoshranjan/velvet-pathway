@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { enrollInCourse } from "@/lib/lms.functions";
 
 export const Route = createFileRoute("/_authenticated/courses/$slug")({
-  head: ({ params }) => ({ meta: [{ title: `${params.slug} — LMS Trainee Program` }] }),
+  head: ({ params }) => ({ meta: [{ title: `${params.slug} — Program` }] }),
   component: CourseDetail,
 });
 
