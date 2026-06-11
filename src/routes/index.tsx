@@ -7,7 +7,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "LMS Trainee Program — Premium Remote Training" },
-      { name: "description", content: "Hands-on remote internship and training programs designed like a Fortune 500 product." },
+      { name: "description", content: "Hands-on, structured remote training programs designed with the polish of a Fortune 500 product." },
     ],
   }),
   component: Landing,
@@ -32,7 +32,7 @@ function Landing() {
               <span className="text-foreground/90">Build like an intern.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              A premium learning environment for remote internships and structured training programs — designed with the polish of Stripe, the focus of Linear, and the warmth of Notion.
+              A premium learning environment for structured training programs — designed with the polish of Stripe, the focus of Linear, and the warmth of Notion.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="h-12 bg-gradient-brand px-6 text-white shadow-glow hover:opacity-90">
