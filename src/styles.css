@@ -149,6 +149,7 @@
 
 @utility font-display {
   font-family: var(--font-display);
-  font-feature-settings: "ss01";
-  letter-spacing: -0.02em;
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: -0.035em;
+  font-weight: 600;
 }
