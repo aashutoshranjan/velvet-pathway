@@ -24,7 +24,7 @@ function Landing() {
           <div className="relative mx-auto max-w-6xl px-6 pt-24 pb-32 text-center">
             <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
               <Sparkles className="h-3 w-3 text-primary" />
-              New cohort opening — Data Analytics, 1 Month Remote
+              New cohort now open — apply today
             </div>
             <h1 className="mt-8 font-display text-6xl leading-[1.05] sm:text-7xl md:text-8xl">
               <span className="text-gradient">Train like a professional.</span>
