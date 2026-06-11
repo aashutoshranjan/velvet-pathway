@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, BookOpen, Award, Users, BarChart3, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Award, Users, TrendingUp, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 
