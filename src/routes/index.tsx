@@ -7,7 +7,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "LMS Trainee Program — Premium Remote Training" },
-      { name: "description", content: "Hands-on remote internship and training programs designed like a Fortune 500 product." },
+      { name: "description", content: "Hands-on, structured remote training programs designed with the polish of a Fortune 500 product." },
     ],
   }),
   component: Landing,
