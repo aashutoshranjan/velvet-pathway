@@ -1,5 +1,6 @@
 import { Link, useNavigate, useRouter } from "@tanstack/react-router";
-import { GraduationCap, LogOut } from "lucide-react";
+import { GraduationCap, LogOut, Upload } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
@@ -8,6 +9,12 @@ export function Header({ variant = "marketing" }: { variant?: "marketing" | "app
   const { user } = useAuth();
   const navigate = useNavigate();
   const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); return; }
+    supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }).then(({ data }) => setIsAdmin(!!data));
+  }, [user]);
 
   async function signOut() {
     await supabase.auth.signOut();
