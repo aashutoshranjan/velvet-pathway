@@ -61,7 +61,7 @@ function CourseDetail() {
       toast.success("Enrolled! Let's get started.");
       qc.invalidateQueries({ queryKey: ["course", slug] });
       qc.invalidateQueries({ queryKey: ["dashboard"] });
-      const first = data!.course.modules[0]?.lessons[0];
+      const first = (data!.course as any).modules[0]?.lessons[0];
       if (first) navigate({ to: "/learn/$courseSlug/$lessonId", params: { courseSlug: slug, lessonId: first.id } });
     },
     onError: (e: any) => toast.error(e.message),
@@ -70,7 +70,8 @@ function CourseDetail() {
   if (isLoading || !data) {
     return <main className="mx-auto max-w-5xl px-6 py-10 space-y-6"><Skeleton className="h-64 rounded-3xl" /><Skeleton className="h-40 rounded-2xl" /></main>;
   }
-  const { course, enrolled, projects, assessment } = data;
+  const { course: courseRaw, enrolled, projects, assessment } = data;
+  const course = courseRaw as any;
   const totalLessons = course.modules.reduce((s: number, m: any) => s + m.lessons.length, 0);
 
   return (
