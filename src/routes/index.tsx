@@ -56,7 +56,7 @@ function Landing() {
             <div className="mt-14 grid gap-6 md:grid-cols-3">
               {[
                 { icon: BookOpen, t: "Structured curriculum", d: "Weeks → modules → lessons with objectives, resources, and assignments." },
-                { icon: BarChart3, t: "Real progress", d: "Per-lesson completion, course progress, resume-where-you-left-off." },
+                { icon: TrendingUp, t: "Real progress", d: "Per-lesson completion, course progress, resume-where-you-left-off." },
                 { icon: Award, t: "Verified certificates", d: "Premium printable certificates with unique serial numbers." },
                 { icon: Users, t: "Cohort experience", d: "Designed to scale from a single trainee to entire programs." },
                 { icon: Sparkles, t: "Polished UI", d: "Stripe-grade typography, motion, and micro-interactions." },
